@@ -1,0 +1,36 @@
+#!/usr/bin/env python3
+
+# Author = Andrea Ceresoni
+
+import requests
+import time
+import argparse
+
+# # Parser email or file with address
+
+parse = argparse.ArgumentParser()
+parse.add_argument("-e", "--Email", dest = "email", help = "E-mail to check")
+parse.add_argument("-f", "--Filename", dest = "filename", help = "File containing email address to parse")
+args = parse.parse_args()
+servername = "https://haveibeenpwned.com"
+mail = str(args.email)
+filename = str(args.filename)
+
+def main():
+  if mail != "None":
+  CheckEmail(mail)
+
+def CheckEmail(mail):
+  headers = {
+    "hibp-api-key": "<your_api_key>"
+  }
+check = requests.get(servername + "/api/v3/breachedaccount/" + mail, headers = headers)
+if str(check.status_code) == "404":
+  print(mail + " has NOT been pwned")
+elif str(check.status_code) == "200":
+  print(mail + " has been pwned")
+elif str(check.status_code) == "401":
+  print("Wrong api key.Permission denied")
+
+if __name__ == "__main__":
+  main()
