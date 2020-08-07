@@ -22,7 +22,7 @@ def main():
 
 def CheckEmail(mail):
     headers = {
-        "hibp-api-key": "967164c2444f406190ce1003a6ba2458"
+        "hibp-api-key": "<you api>"
     }
 check = requests.get(servername + "/api/v3/breachedaccount/" + mail, headers = headers)
 if str(check.status_code) == "404":
