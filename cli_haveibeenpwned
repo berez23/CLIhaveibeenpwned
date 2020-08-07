@@ -17,20 +17,20 @@ mail = str(args.email)
 filename = str(args.filename)
 
 def main():
-  if mail != "None":
-  CheckEmail(mail)
+    if mail != "None":
+    CheckEmail(mail)
 
 def CheckEmail(mail):
-  headers = {
-    "hibp-api-key": "<your_api_key>"
-  }
+    headers = {
+        "hibp-api-key": "967164c2444f406190ce1003a6ba2458"
+    }
 check = requests.get(servername + "/api/v3/breachedaccount/" + mail, headers = headers)
 if str(check.status_code) == "404":
-  print(mail + " has NOT been pwned")
+    print(mail + " has NOT been pwned")
 elif str(check.status_code) == "200":
-  print(mail + " has been pwned")
+    print(mail + " has been pwned")
 elif str(check.status_code) == "401":
-  print("Wrong api key.Permission denied")
+    print("Wrong api key.Permission denied")
 
 if __name__ == "__main__":
-  main()
+    main()
